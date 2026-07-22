@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, LayoutGrid, Sparkles } from "lucide-react";
+import { Home, LayoutGrid } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 
 const navigationItems = [
@@ -25,14 +25,7 @@ export function Topbar() {
           <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-slate-900 border border-indigo-500/40 shadow-md shadow-indigo-500/20 transition-transform duration-200 group-hover:scale-105">
             <Image src="/logos/web_logo.png" alt="Hindi Language Logo" fill className="object-cover" priority />
           </div>
-          <span className="hidden sm:block">
-            <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.12em] text-indigo-600 dark:text-indigo-300">
-              <Sparkles className="h-3 w-3" />
-              हिन्दी
-            </span>
-            <span className="mt-0.5 block text-sm font-black tracking-tight text-zinc-900 dark:text-white">हिंदी भाषा</span>
-          </span>
-          <span className="text-sm font-black text-zinc-900 sm:hidden dark:text-white">हिंदी भाषा</span>
+          <span className="text-base font-black tracking-tight text-zinc-900 dark:text-white">हिंदी भाषा</span>
         </Link>
 
         <nav aria-label="मुख्य नेविगेशन" className="flex items-center rounded-xl bg-zinc-100/80 p-1 dark:bg-zinc-900">
