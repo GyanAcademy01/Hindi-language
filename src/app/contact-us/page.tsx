@@ -1,5 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { MapPin, Send, Smartphone, Globe, Phone, MessageSquare, Video, Camera, Clock, HelpCircle, ShieldAlert } from "lucide-react";
+import { MapPin, Send, Smartphone, Globe, Phone, Mail, Clock, HelpCircle, MessageSquare, Video, Camera, CheckCircle2 } from "lucide-react";
 
 export default function ContactUsPage() {
   const mapLink = "https://maps.app.goo.gl/8E9j5JSvLspXTRKk7";
@@ -9,14 +12,36 @@ export default function ContactUsPage() {
   const instagramLink = "https://instagram.com/gyanacademy_official";
   const websiteLink = "https://gyanacademys.com";
 
+  const [formData, setFormData] = useState({
+    subject: "📌 सामान्य पूछताछ (General Inquiry)",
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+
+    const emailSubject = encodeURIComponent(`${formData.subject} - ${formData.name}`);
+    const emailBody = encodeURIComponent(
+      `नाम: ${formData.name}\nईमेल: ${formData.email}\nविषय: ${formData.subject}\n\nसंदेश:\n${formData.message}`
+    );
+
+    // Launch direct mail client
+    window.location.href = `mailto:web.dev.gyanacademy@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+  };
+
   const contactFaqs = [
     {
       q: "हमारा संदेश भेजने के बाद उत्तर मिलने में कितना समय लगता है?",
       a: "हमारी टीम 24 से 48 व्यावसायिक घंटों के भीतर आपके प्रश्नों का समाधान प्रदान करती है।",
     },
     {
-      q: "क्या मैं नए अध्याय या व्याकरण थ्योरी जोड़ने का सुझाव दे सकता हूँ?",
-      a: "हाँ, संपर्क फ़ॉर्म में 'अध्ययन सामग्री सुझाव' चुनकर आप अपना बहुमूल्य सुझाव भेज सकते हैं।",
+      q: "क्या मैं फोन पर सीधी सहायता प्राप्त कर सकता हूँ?",
+      a: "हाँ, सोमवार से शनिवार सुबह 9:00 बजे से शाम 6:00 बजे तक +91 87583 77555 पर संपर्क कर सकते हैं।",
     },
   ];
 
@@ -45,6 +70,35 @@ export default function ContactUsPage() {
           </div>
         </div>
 
+        {/* Quick Direct Contact Buttons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <a
+            href="tel:+918758377555"
+            className="group flex items-center gap-3.5 rounded-2xl border border-indigo-200 bg-indigo-50/70 p-4 shadow-sm transition-all hover:bg-indigo-100/70 hover:shadow-md dark:border-indigo-900/50 dark:bg-indigo-950/30 dark:hover:bg-indigo-900/40"
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/30 transition-transform group-hover:scale-105">
+              <Phone className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-[11px] font-extrabold uppercase tracking-wide text-indigo-600 dark:text-indigo-300">सीधी फोन हेल्पलाईन</p>
+              <p className="text-sm sm:text-base font-black text-zinc-900 dark:text-white">+91 87583 77555</p>
+            </div>
+          </a>
+
+          <a
+            href="mailto:web.dev.gyanacademy@gmail.com"
+            className="group flex items-center gap-3.5 rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 shadow-sm transition-all hover:bg-emerald-100/70 hover:shadow-md dark:border-emerald-900/50 dark:bg-emerald-950/30 dark:hover:bg-emerald-900/40"
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/30 transition-transform group-hover:scale-105">
+              <Mail className="h-5 w-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[11px] font-extrabold uppercase tracking-wide text-emerald-600 dark:text-emerald-300">सीधा ईमेल सहायता</p>
+              <p className="text-xs sm:text-sm font-black text-zinc-900 dark:text-white truncate">web.dev.gyanacademy@gmail.com</p>
+            </div>
+          </a>
+        </div>
+
         {/* Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left: Contact Info & Address Card */}
@@ -57,7 +111,7 @@ export default function ContactUsPage() {
               <div className="mt-3 rounded-xl bg-zinc-50 p-4 border border-zinc-200/60 dark:bg-zinc-800/50 dark:border-zinc-700/50">
                 <h3 className="font-bold text-sm text-zinc-900 dark:text-white">ज्ञान अकादमी (Gyan Academy)</h3>
                 <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
-                  ગાંધીનગર, ગુજરાત (Gandhinagar, Gujarat)
+                  Navkar Plaza, Sector 6, ગાંધીનગર - 382006, ગુજરાત.
                 </p>
 
                 <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-zinc-600 dark:text-zinc-400 border-t border-zinc-200/60 dark:border-zinc-700/50 pt-2.5">
@@ -136,16 +190,28 @@ export default function ContactUsPage() {
             </div>
           </div>
 
-          {/* Right: Message Form Card */}
+          {/* Right: Interactive Message Form Card */}
           <div className="rounded-[24px] border border-zinc-200/80 bg-white p-6 shadow-lg backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900 flex flex-col">
             <h2 className="text-lg font-black text-zinc-900 dark:text-white flex items-center gap-2">
               <MessageSquare className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-              हमें संदेश भेजें
+              ईमेल द्वारा संदेश भेजें
             </h2>
-            <form className="mt-4 flex flex-col gap-3 flex-1">
+
+            {submitted && (
+              <div className="mt-3 flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 p-3 text-xs font-bold text-emerald-700 dark:border-emerald-900/50 dark:bg-emerald-950/30 dark:text-emerald-300">
+                <CheckCircle2 className="h-4 w-4 shrink-0" />
+                आपका संदेश ऐप/ईमेल क्लाइंट द्वारा तैयार किया जा रहा है...
+              </div>
+            )}
+
+            <form className="mt-4 flex flex-col gap-3 flex-1" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">पूछताछ का विषय (Subject)</label>
-                <select className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+                <select
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+                >
                   <option>📌 सामान्य पूछताछ (General Inquiry)</option>
                   <option>🛠️ तकनीकी सहायता (Technical Support)</option>
                   <option>📚 अध्ययन सामग्री सुझाव (Content Feedback)</option>
@@ -157,6 +223,8 @@ export default function ContactUsPage() {
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">आपका नाम (Full Name)</label>
                 <input
                   type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="नाम लिखें..."
                   className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
                   required
@@ -167,6 +235,8 @@ export default function ContactUsPage() {
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">ईमेल (Email Address)</label>
                 <input
                   type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="ईमेल दर्ज करें..."
                   className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
                   required
@@ -177,6 +247,8 @@ export default function ContactUsPage() {
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">संदेश (Message)</label>
                 <textarea
                   rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="अपना संदेश लिखें..."
                   className="w-full flex-1 rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white resize-none"
                   required
@@ -187,7 +259,7 @@ export default function ContactUsPage() {
                 type="submit"
                 className="mt-2 w-full rounded-xl bg-indigo-600 py-3 text-xs font-extrabold text-white shadow-md transition hover:bg-indigo-700 active:scale-[0.98]"
               >
-                संदेश भेजें
+                ईमेल द्वारा संदेश भेजें
               </button>
             </form>
           </div>
@@ -202,7 +274,7 @@ export default function ContactUsPage() {
           <div className="space-y-3">
             {contactFaqs.map((faq) => (
               <div key={faq.q} className="rounded-xl bg-zinc-50 p-4 border border-zinc-200/60 dark:bg-zinc-800/40 dark:border-zinc-700/50">
-                <h4 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white">{faq.q}</h4>
+                <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white">{faq.q}</h3>
                 <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-300">{faq.a}</p>
               </div>
             ))}
