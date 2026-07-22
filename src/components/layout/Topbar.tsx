@@ -54,9 +54,9 @@ export function Topbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <InstallButton />
           <FontSizeControl />
           <ThemeToggle />
+          <InstallButton />
         </div>
       </div>
     </header>
