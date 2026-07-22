@@ -55,7 +55,7 @@ export function InstallButton() {
       title="ऐप इंस्टॉल करें (Install App)"
       className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-2.5 py-1.5 text-xs font-extrabold text-white shadow-md shadow-indigo-600/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
     >
-      <Download className="h-3.5 w-3.5 animate-bounce" />
+      <Download className="h-3.5 w-3.5" />
       <span className="hidden sm:inline">ऐप इंस्टॉल करें</span>
       <span className="sm:hidden">इंस्टॉल</span>
     </button>

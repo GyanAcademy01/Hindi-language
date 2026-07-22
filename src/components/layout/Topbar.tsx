@@ -24,8 +24,8 @@ export function Topbar() {
     <header className="sticky top-0 z-50 w-full border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl dark:border-zinc-800/80 dark:bg-zinc-950/80">
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="group flex items-center gap-2.5" aria-label="हिंदी भाषा होम">
-          <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-slate-900 border border-indigo-500/40 shadow-md shadow-indigo-500/20 transition-transform duration-200 group-hover:scale-105">
-            <Image src="/logos/web_logo.png" alt="Hindi Language Logo" fill className="object-cover" priority />
+          <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-slate-900 border border-indigo-500/40 shadow-md shadow-indigo-500/20 transition-transform duration-200">
+            <Image src="/logos/web_logo.webp" alt="Hindi Language Logo" fill className="object-cover" priority />
           </div>
           <span className="text-base font-black tracking-tight text-zinc-900 dark:text-white">हिंदी भाषा</span>
         </Link>

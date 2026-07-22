@@ -4,14 +4,9 @@ import { subjects } from "@/lib/data";
 /* ---------------- Inline icons ---------------- */
 const ICONS: Record<string, React.ReactNode> = {
   book: (<><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></>),
-  file: (<><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><path d="M16 13H8" /><path d="M16 17H8" /><path d="M10 9H8" /></>),
   check: (<><circle cx="12" cy="12" r="10" /><path d="m9 12 2 2 4-4" /></>),
-  language: (<><path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" /></>),
-  monitor: (<><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8" /><path d="M12 17v4" /></>),
-  star: (<path d="M12 2l2.09 6.26L20 9l-5 3.9L16.18 20 12 16.2 7.82 20 9 12.9 4 9l5.91-.74z" />),
   layers: (<><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" /><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></>),
   arrow: (<path d="M5 12h14M13 5l7 7-7 7" />),
-  chevron: (<path d="m9 18 6-6-6-6" />),
 };
 
 function Icon({ name, className }: { name: string; className?: string }) {
@@ -62,7 +57,7 @@ export default function HomePage() {
           <div className="mt-8 flex items-center justify-center">
             <Link href="/subjects" prefetch>
               <span
-                className="inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-extrabold text-white transition-transform duration-200 hover:-translate-y-1 active:scale-95"
+                className="inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-extrabold text-white transition-transform duration-200 active:scale-95"
                 style={{ backgroundColor: "#6366f1", boxShadow: BLACK_SM }}
               >
                 पढ़ाई शुरू करें
@@ -77,7 +72,7 @@ export default function HomePage() {
           <div className="relative overflow-hidden rounded-[24px] border border-zinc-200/80 bg-white/80 p-3 sm:p-4 backdrop-blur-xl shadow-lg shadow-indigo-500/5 dark:border-zinc-800 dark:bg-zinc-900/80">
             <div className="grid grid-cols-3 divide-x divide-zinc-200/70 dark:divide-zinc-800">
               {stats.map((s) => (
-                <div key={s.label} className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3.5 px-2 py-1 text-center sm:text-left transition-all duration-300 hover:scale-[1.03]">
+                <div key={s.label} className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3.5 px-2 py-1 text-center sm:text-left transition-all duration-300">
                   <span className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl text-white shadow-md shadow-black/10" style={{ backgroundColor: s.color }}>
                     <Icon name={s.icon} className="h-5 w-5" />
                   </span>

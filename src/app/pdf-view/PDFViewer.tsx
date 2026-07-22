@@ -217,7 +217,7 @@ export default function PDFViewer() {
         // Check cache first
         let fileSource = file;
         try {
-          const cache = await caches.open('maths-pdf-cache-v1');
+          const cache = await caches.open('hindi-pdf-cache-v1');
           const cachedRes = await cache.match(file);
           if (cachedRes) {
             const blob = await cachedRes.blob();
@@ -256,7 +256,7 @@ export default function PDFViewer() {
         if (typeof fileSource === 'string') {
           setTimeout(async () => {
             try {
-              const cache = await caches.open('maths-pdf-cache-v1');
+              const cache = await caches.open('hindi-pdf-cache-v1');
               const existing = await cache.match(file);
               if (!existing) {
                 const res = await fetch(file);
@@ -374,9 +374,9 @@ export default function PDFViewer() {
     return (
       <div className="pdf-viewer-container">
         <div className="pdf-loading">
-          <p>❌ PDF લોડ થઈ શક્યું નહીં</p>
+          <p>❌ PDF लोड नहीं हो सका</p>
           <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>{loadError}</p>
-          <button onClick={() => router.back()} style={{ marginTop: 16, padding: '8px 20px', borderRadius: 8, background: 'white', border: 'none', cursor: 'pointer', fontWeight: 600 }}>← પાછા જાઓ</button>
+          <button onClick={() => router.back()} style={{ marginTop: 16, padding: '8px 20px', borderRadius: 8, background: 'white', border: 'none', cursor: 'pointer', fontWeight: 600 }}>← वापस जाएं</button>
         </div>
       </div>
     );
@@ -390,7 +390,7 @@ export default function PDFViewer() {
       <div className="pdf-topbar">
         <div className="pdf-topbar-left">
           {/* Back Button */}
-          <button className="custom-back-btn" onClick={() => router.back()} title="પાછા જાઓ">
+          <button className="custom-back-btn" onClick={() => router.back()} title="वापस जाएं">
             <ArrowLeft size={18} strokeWidth={2.5} />
           </button>
           <h2 className="pdf-title">{title}</h2>
@@ -416,7 +416,7 @@ export default function PDFViewer() {
       <div className="pdf-content-area" ref={contentRef} onCopy={(e) => e.preventDefault()}>
         {loadingPhase === 'loading' && !pdf && (
           <div className="flex items-center justify-center w-full min-h-[65vh]">
-            <DnaLoader text="PDF લોડ થઈ રહી છે..." />
+            <DnaLoader text="PDF लोड हो रही है..." />
           </div>
         )}
 

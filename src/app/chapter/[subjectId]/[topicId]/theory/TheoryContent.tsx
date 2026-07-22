@@ -315,7 +315,7 @@ export default function TheoryContent({ subject, topic, theory, subjectId, topic
         <div className="mt-12 flex flex-col items-center gap-3">
           <Link href={`/chapter/${subjectId}/${topicId}/test`}>
             <motion.span
-              whileHover={{ y: -3, scale: 1.02 }}
+
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 rounded-full px-9 py-3.5 text-[15px] font-extrabold text-white"
               style={{ background: subjectGradient, boxShadow: `0 20px 40px -12px ${subject.color}b3` }}

@@ -91,6 +91,16 @@ const QUESTION_COLORS = [
 ];
 
 export default function TestContent({ subject, test, subjectId, topicId }: TestContentProps) {
+  if (!test?.questions || test.questions.length === 0) {
+    return (
+      <main className="flex min-h-[50vh] items-center justify-center p-4">
+        <div className="text-center">
+          <p className="text-xl mb-4 text-zinc-500 font-bold">कोई प्रश्न उपलब्ध नहीं है।</p>
+        </div>
+      </main>
+    );
+  }
+
   const [currentQ, setCurrentQ] = useState(0);
   const activeColor = QUESTION_COLORS[currentQ % QUESTION_COLORS.length];
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);

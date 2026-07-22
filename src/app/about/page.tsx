@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, CheckCircle, FileText, Sparkles, GraduationCap, ShieldCheck, HelpCircle, Target, Award, BookMarked } from "lucide-react";
+import { BookOpen, CheckCircle, FileText, Sparkles, GraduationCap, HelpCircle, Target, Award, BookMarked } from "lucide-react";
 
 export default function AboutPage() {
   const syllabusItems = [
@@ -38,10 +38,8 @@ export default function AboutPage() {
         {/* Header */}
         <div className="relative flex min-h-[36px] items-center justify-center">
           <div className="absolute left-0">
-            <Link href="/" prefetch>
-              <span className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-gradient-to-b from-[#f24c4c] to-[#d92b2b] border-b-[3px] border-[#9b1c1c] text-white hover:brightness-110 active:translate-y-[1.5px] active:border-b-[1.5px] transition-all duration-75 cursor-pointer shadow-[0_3px_8px_rgba(239,68,68,0.15)]" aria-label="पीछे जाएं">
-                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-              </span>
+            <Link href="/" prefetch className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-gradient-to-b from-[#f24c4c] to-[#d92b2b] border-b-[3px] border-[#9b1c1c] text-white hover:brightness-110 active:translate-y-[1.5px] active:border-b-[1.5px] transition-all duration-75 cursor-pointer shadow-[0_3px_8px_rgba(239,68,68,0.15)]" aria-label="पीछे जाएं">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
             </Link>
           </div>
           <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-full shadow-md shadow-black/5 dark:shadow-black/20">
@@ -54,7 +52,7 @@ export default function AboutPage() {
         <div className="relative overflow-hidden rounded-[24px] border border-zinc-200/80 bg-white/90 p-6 sm:p-8 shadow-xl backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90">
           <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
             <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-slate-900 border-2 border-indigo-500/50 shadow-lg shadow-indigo-500/20">
-              <Image src="/logos/web_logo.png" alt="Gyan Academy Logo" width={80} height={80} className="object-cover" priority />
+              <Image src="/logos/web_logo.webp" alt="Gyan Academy Logo" width={80} height={80} className="object-cover" priority />
             </div>
             <div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-600 dark:bg-indigo-500/10 dark:text-indigo-300">

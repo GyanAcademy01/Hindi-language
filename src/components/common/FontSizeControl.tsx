@@ -31,7 +31,7 @@ export function FontSizeControl() {
       <motion.button
         onClick={() => setIsOpen((o) => !o)}
         whileTap={{ scale: 0.9 }}
-        whileHover={{ scale: 1.05 }}
+
         className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700/60 cursor-pointer hover:bg-zinc-200/70 dark:hover:bg-zinc-700 transition-all shadow-sm"
         aria-label="Text size settings"
         title="Text Size"

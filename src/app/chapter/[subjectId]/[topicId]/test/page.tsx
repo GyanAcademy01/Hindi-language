@@ -7,7 +7,7 @@ import * as padhtishastraData from "@/data/padhtishastra";
 import * as grammarData from "@/data/grammar";
 import TestContent from "./TestContent";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
 import type { TestData } from "@/types/test";
 
 const std6Tests: Record<string, TestData> = {
@@ -152,9 +152,9 @@ export default async function TestPage(props: { params: Promise<{ subjectId: str
           <p className="text-2xl mb-4">😕</p>
           <p className="text-muted-foreground">इस अध्याय के लिए अभी टेस्ट उपलब्ध नहीं है।</p>
           <Link href={`/chapter/${subjectId}`}>
-            <Button variant="outline" className="mt-4">
+            <button className="mt-4 rounded-xl border border-zinc-200 dark:border-zinc-700 px-4 py-2 text-sm font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
               ← वापस जाएं
-            </Button>
+            </button>
           </Link>
         </div>
       </main>
