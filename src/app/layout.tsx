@@ -30,13 +30,29 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Hindi भाषा WebApp",
-    template: "%s | Hindi Language",
+    default: "हिंदी भाषा WebApp",
+    template: "%s | हिंदी भाषा",
   },
   description: "हिंदी भाषा सीखने के लिए Theory और Test - कक्षा 6 से 8 · व्याकरण · पद्धतिशास्त्र",
   keywords: ["Hindi Language", "हिंदी व्याकरण", "भाषा", "पद्धतिशास्त्र"],
-  authors: [{ name: "Hindi Language" }],
-  creator: "Hindi Language",
+  authors: [{ name: "Gyan Academy" }],
+  creator: "Gyan Academy",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "हिंदी भाषा",
+  },
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   robots: {
     index: true,
     follow: true,
@@ -49,6 +65,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
