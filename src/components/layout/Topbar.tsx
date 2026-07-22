@@ -3,12 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, LayoutGrid } from "lucide-react";
+import { Home, LayoutGrid, Info, PhoneCall } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
 
 const navigationItems = [
   { href: "/", label: "होम", icon: Home },
   { href: "/subjects", label: "विषय", icon: LayoutGrid },
+  { href: "/about", label: "हमारे बारे में", icon: Info },
+  { href: "/contact-us", label: "संपर्क करें", icon: PhoneCall },
 ];
 
 export function Topbar() {
@@ -28,7 +30,7 @@ export function Topbar() {
           <span className="text-base font-black tracking-tight text-zinc-900 dark:text-white">हिंदी भाषा</span>
         </Link>
 
-        <nav aria-label="मुख्य नेविगेशन" className="flex items-center rounded-xl bg-zinc-100/80 p-1 dark:bg-zinc-900">
+        <nav aria-label="मुख्य नेविगेशन" className="hidden sm:flex items-center rounded-xl bg-zinc-100/80 p-1 dark:bg-zinc-900">
           {navigationItems.map(({ href, label, icon: Icon }) => {
             const isActive = pathname === href || (href === "/subjects" && pathname.startsWith("/chapter"));
 
@@ -36,6 +38,7 @@ export function Topbar() {
               <Link
                 key={href}
                 href={href}
+                prefetch
                 aria-current={isActive ? "page" : undefined}
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-extrabold transition-all ${
                   isActive
