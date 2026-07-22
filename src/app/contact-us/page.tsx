@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MapPin, Send, Smartphone, Globe, Phone, Mail, Clock, HelpCircle, MessageSquare, Video, Camera, CheckCircle2 } from "lucide-react";
+import { MapPin, Send, Smartphone, Globe, Phone, Mail, Clock, HelpCircle, MessageSquare, Video, Camera, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 
 export default function ContactUsPage() {
   const mapLink = "https://maps.app.goo.gl/8E9j5JSvLspXTRKk7";
@@ -19,28 +19,59 @@ export default function ContactUsPage() {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-    const emailSubject = encodeURIComponent(`${formData.subject} - ${formData.name}`);
-    const emailBody = encodeURIComponent(
-      `नाम: ${formData.name}\nईमेल: ${formData.email}\nविषय: ${formData.subject}\n\nसंदेश:\n${formData.message}`
-    );
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/web.dev.gyanacademy@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          _subject: `[Gyan Academy Hindi] ${formData.subject} - ${formData.name}`,
+          name: formData.name,
+          email: formData.email,
+          subject_category: formData.subject,
+          message: formData.message,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
 
-    // Launch direct mail client
-    window.location.href = `mailto:web.dev.gyanacademy@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+      if (response.ok) {
+        setSubmitted(true);
+        setFormData({
+          subject: "📌 सामान्य पूछताछ (General Inquiry)",
+          name: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        throw new Error("ईमेल भेजने में असमर्थ। कृपया पुनः प्रयास करें।");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("नेटवर्क समस्या। कृपया सीधे ऊपर दिए गए ईमेल पर मेल भेजें।");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactFaqs = [
     {
       q: "हमारा संदेश भेजने के बाद उत्तर मिलने में कितना समय लगता है?",
-      a: "हमारी टीम 24 से 48 व्यावसायिक घंटों के भीतर आपके प्रश्नों का समाधान प्रदान करती है।",
+      a: "हमारी टीम 24 से 48 व्यावसायिक घंटों के भीतर आपके इनबॉक्स में उत्तर भेज देगी।",
     },
     {
-      q: "क्या मैं फोन पर सीधी सहायता प्राप्त कर सकता हूँ?",
+      q: "क्या मुझे फोन पर सीधी सहायता मिल सकती है?",
       a: "हाँ, सोमवार से शनिवार सुबह 9:00 बजे से शाम 6:00 बजे तक +91 87583 77555 पर संपर्क कर सकते हैं।",
     },
   ];
@@ -190,17 +221,24 @@ export default function ContactUsPage() {
             </div>
           </div>
 
-          {/* Right: Interactive Message Form Card */}
+          {/* Right: Direct Web API Message Form Card */}
           <div className="rounded-[24px] border border-zinc-200/80 bg-white p-6 shadow-lg backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900 flex flex-col">
             <h2 className="text-lg font-black text-zinc-900 dark:text-white flex items-center gap-2">
               <MessageSquare className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-              ईमेल द्वारा संदेश भेजें
+              डायरेक्ट वेबसाइट से संदेश भेजें
             </h2>
 
             {submitted && (
-              <div className="mt-3 flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 p-3 text-xs font-bold text-emerald-700 dark:border-emerald-900/50 dark:bg-emerald-950/30 dark:text-emerald-300">
-                <CheckCircle2 className="h-4 w-4 shrink-0" />
-                आपका संदेश ऐप/ईमेल क्लाइंट द्वारा तैयार किया जा रहा है...
+              <div className="mt-3 flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 p-3.5 text-xs font-bold text-emerald-700 dark:border-emerald-900/50 dark:bg-emerald-950/40 dark:text-emerald-300 animate-in fade-in duration-300">
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
+                <span>आपका संदेश सफलतापूर्वक ज्ञान अकादमी के इनबॉक्स में पहुँच गया है!</span>
+              </div>
+            )}
+
+            {errorMessage && (
+              <div className="mt-3 flex items-center gap-2 rounded-xl border border-red-300 bg-red-50 p-3.5 text-xs font-bold text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300">
+                <AlertCircle className="h-5 w-5 shrink-0 text-red-600 dark:text-red-400" />
+                <span>{errorMessage}</span>
               </div>
             )}
 
@@ -211,6 +249,7 @@ export default function ContactUsPage() {
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+                  disabled={isSubmitting}
                 >
                   <option>📌 सामान्य पूछताछ (General Inquiry)</option>
                   <option>🛠️ तकनीकी सहायता (Technical Support)</option>
@@ -228,6 +267,7 @@ export default function ContactUsPage() {
                   placeholder="नाम लिखें..."
                   className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -240,6 +280,7 @@ export default function ContactUsPage() {
                   placeholder="ईमेल दर्ज करें..."
                   className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -252,14 +293,26 @@ export default function ContactUsPage() {
                   placeholder="अपना संदेश लिखें..."
                   className="w-full flex-1 rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white resize-none"
                   required
+                  disabled={isSubmitting}
                 />
               </div>
 
               <button
                 type="submit"
-                className="mt-2 w-full rounded-xl bg-indigo-600 py-3 text-xs font-extrabold text-white shadow-md transition hover:bg-indigo-700 active:scale-[0.98]"
+                disabled={isSubmitting}
+                className="mt-2 flex items-center justify-center gap-2 w-full rounded-xl bg-indigo-600 py-3 text-xs font-extrabold text-white shadow-md transition hover:bg-indigo-700 active:scale-[0.98] disabled:opacity-70 cursor-pointer"
               >
-                ईमेल द्वारा संदेश भेजें
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>संदेश भेजा जा रहा है...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    <span>डायरेक्ट संदेश भेजें (Direct Submit)</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
