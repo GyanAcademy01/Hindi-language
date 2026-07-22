@@ -8,8 +8,10 @@ import type { TestData } from "@/types/test";
 
 import { CheckCircle2, XCircle, ChevronDown } from "lucide-react";
 
+import type { Subject } from "@/lib/data";
+
 interface TestContentProps {
-  subject: any;
+  subject: Subject;
   test: TestData;
   subjectId: string;
   topicId: string;
@@ -468,8 +470,8 @@ export default function TestContent({ subject, test, subjectId, topicId }: TestC
                   const optionLabel = String.fromCharCode(65 + idx);
 
                   let containerStyle = "border-[1.5px] border-zinc-300/70 dark:border-zinc-800 hover:border-blue-300 dark:hover:border-blue-700 bg-[#f8f9fa] dark:bg-zinc-800/50 shadow-[0_3px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.12)]";
-                  let labelStyle = "text-zinc-500 dark:text-zinc-400 font-bold";
-                  let textStyle = "text-zinc-800 dark:text-zinc-200 font-medium";
+                  const labelStyle = "text-zinc-500 dark:text-zinc-400 font-bold";
+                  const textStyle = "text-zinc-800 dark:text-zinc-200 font-medium";
                   let animationProps = {};
 
                   if (isAnswered) {

@@ -4,11 +4,13 @@ import * as std7Data from "@/data/std7";
 import * as std8Data from "@/data/std8";
 import * as std9Data from "@/data/std9";
 import * as padhtishastraData from "@/data/padhtishastra";
+import * as grammarData from "@/data/grammar";
 import TheoryContent from "./TheoryContent";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import type { TheoryData } from "@/types/theory";
 
-const std6Theory: Record<string, any> = {
+const std6Theory: Record<string, TheoryData> = {
   ch1: std6Data.std6_ch1_theory,
   ch2: std6Data.std6_ch2_theory,
   ch3: std6Data.std6_ch3_theory,
@@ -26,7 +28,7 @@ const std6Theory: Record<string, any> = {
   ch15: std6Data.std6_ch15_theory,
 };
 
-const std7Theory: Record<string, any> = {
+const std7Theory: Record<string, TheoryData> = {
   ch1: std7Data.std7_ch1_theory,
   ch2: std7Data.std7_ch2_theory,
   ch3: std7Data.std7_ch3_theory,
@@ -47,7 +49,7 @@ const std7Theory: Record<string, any> = {
   ch18: std7Data.std7_ch18_theory,
 };
 
-const std8Theory: Record<string, any> = {
+const std8Theory: Record<string, TheoryData> = {
   ch1: std8Data.std8_ch1_theory,
   ch2: std8Data.std8_ch2_theory,
   ch3: std8Data.std8_ch3_theory,
@@ -68,7 +70,7 @@ const std8Theory: Record<string, any> = {
   ch18: std8Data.std8_ch18_theory,
 };
 
-const std9Theory: Record<string, any> = {
+const std9Theory: Record<string, TheoryData> = {
   ch1: std9Data.std9_ch1_theory,
   ch2: std9Data.std9_ch2_theory,
   ch3: std9Data.std9_ch3_theory,
@@ -95,7 +97,7 @@ const std9Theory: Record<string, any> = {
   ch24: std9Data.std9_ch24_theory,
 };
 
-const padhtishastraTheory: Record<string, any> = {
+const padhtishastraTheory: Record<string, TheoryData> = {
   ch1: padhtishastraData.padhtishastra_ch1_theory,
   ch2: padhtishastraData.padhtishastra_ch2_theory,
   ch3: padhtishastraData.padhtishastra_ch3_theory,
@@ -105,6 +107,25 @@ const padhtishastraTheory: Record<string, any> = {
   ch7: padhtishastraData.padhtishastra_ch7_theory,
   ch8: padhtishastraData.padhtishastra_ch8_theory,
   ch9: padhtishastraData.padhtishastra_ch9_theory,
+};
+
+const grammarTheory: Record<string, TheoryData> = {
+  ch1: grammarData.grammar_ch1_theory,
+  ch2: grammarData.grammar_ch2_theory,
+  ch3: grammarData.grammar_ch3_theory,
+  ch4: grammarData.grammar_ch4_theory,
+  ch5: grammarData.grammar_ch5_theory,
+  ch6: grammarData.grammar_ch6_theory,
+  ch7: grammarData.grammar_ch7_theory,
+  ch8: grammarData.grammar_ch8_theory,
+  ch9: grammarData.grammar_ch9_theory,
+  ch10: grammarData.grammar_ch10_theory,
+  ch11: grammarData.grammar_ch11_theory,
+  ch12: grammarData.grammar_ch12_theory,
+  ch13: grammarData.grammar_ch13_theory,
+  ch14: grammarData.grammar_ch14_theory,
+  ch15: grammarData.grammar_ch15_theory,
+  ch16: grammarData.grammar_ch16_theory,
 };
 
 export default async function TheoryPage(props: { params: Promise<{ subjectId: string, topicId: string }> }) {
@@ -117,7 +138,8 @@ export default async function TheoryPage(props: { params: Promise<{ subjectId: s
     subjectId === 'std7' ? std7Theory[topicId] : 
     subjectId === 'std8' ? std8Theory[topicId] : 
     subjectId === 'std9' ? std9Theory[topicId] : 
-    subjectId === 'padhtishastra' ? padhtishastraTheory[topicId] : null;
+    subjectId === 'padhtishastra' ? padhtishastraTheory[topicId] : 
+    subjectId === 'grammar' ? grammarTheory[topicId] : null;
 
   if (!subject || !topic || !theoryData) {
     return (

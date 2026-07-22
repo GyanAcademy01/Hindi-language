@@ -1,7 +1,7 @@
 export interface TheorySection {
-  id: string;
+  id?: string;
   title: string;
-  type: "text" | "points" | "table" | "qa" | "summary";
+  type?: "text" | "points" | "table" | "qa" | "summary";
   content?: string;
   points?: string[];
   tableData?: {
@@ -11,6 +11,11 @@ export interface TheorySection {
   qa?: {
     q: string;
     a: string;
+  }[];
+  subsections?: {
+    id?: string;
+    title: string;
+    content: string;
   }[];
 }
 

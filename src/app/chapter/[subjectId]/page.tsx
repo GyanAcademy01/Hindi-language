@@ -2,20 +2,9 @@
 
 import { use } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { CardContent } from "@/components/ui/card";
 import { subjects } from '@/lib/data';
-import { Variants } from 'framer-motion';
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-};
 
 export default function ChapterListPage(props: { params: Promise<{ subjectId: string }> }) {
   const params = use(props.params);

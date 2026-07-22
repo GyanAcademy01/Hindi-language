@@ -84,7 +84,7 @@ const TYPE_ACCENTS: Record<string, Accent> = {
 };
 
 function getAccent(section: TheorySection): Accent {
-  return SECTION_ACCENTS[section.id] ?? TYPE_ACCENTS[section.type] ?? TYPE_ACCENTS.text;
+  return (section.id ? SECTION_ACCENTS[section.id] : undefined) ?? (section.type ? TYPE_ACCENTS[section.type] : undefined) ?? TYPE_ACCENTS.text;
 }
 
 function renderFormattedText(text: string) {
@@ -108,7 +108,7 @@ export default function TheoryContent({ subject, topic, theory, subjectId, topic
 
     return (
       <section
-        key={section.id}
+        key={section.id || `section-${index}`}
         className="overflow-hidden rounded-[26px] border border-zinc-200/60 dark:border-zinc-850 shadow-[0_25px_55px_-12px_rgba(0,0,0,0.26),0_12px_24px_-10px_rgba(0,0,0,0.2)]"
       >
         {/* Gradient header banner */}
@@ -132,16 +132,18 @@ export default function TheoryContent({ subject, topic, theory, subjectId, topic
         {/* Card body */}
         <div className="bg-white px-5 py-6 sm:px-7 sm:py-7 dark:bg-zinc-900">
           {/* Text / Summary */}
-          {(section.type === "text" || section.type === "summary") && section.content && (
+          {(!section.type || section.type === "text" || section.type === "summary") && section.content && (
             <div className="space-y-4 text-[15.5px] leading-[1.9] text-slate-700 sm:text-base dark:text-zinc-300">
-              {section.content.split("\n\n").map((para, i) => (
-                <p key={i}>{renderFormattedText(para)}</p>
+              {section.content.split("\n").filter(Boolean).map((para, i) => (
+                <p key={i} className={para.trim().match(/^[0-9]+\.|^-/) ? "ml-4 mb-2" : "mb-3"}>
+                  {renderFormattedText(para)}
+                </p>
               ))}
             </div>
           )}
 
           {/* Points */}
-          {section.type === "points" && section.points && (
+          {(!section.type || section.type === "points") && section.points && (
             <ol className="space-y-4">
               {section.points.map((point, i) => (
                 <li key={i} className="flex items-start gap-3.5">
@@ -158,7 +160,7 @@ export default function TheoryContent({ subject, topic, theory, subjectId, topic
           )}
 
           {/* Table */}
-          {section.type === "table" && section.tableData && (
+          {(!section.type || section.type === "table") && section.tableData && (
             <div className="overflow-hidden rounded-2xl ring-1 ring-slate-200/70 dark:ring-white/[0.08]">
               <table className="w-full border-collapse text-left text-sm sm:text-[15px]">
                 <thead>
@@ -192,7 +194,7 @@ export default function TheoryContent({ subject, topic, theory, subjectId, topic
           )}
 
           {/* Q & A */}
-          {section.type === "qa" && section.qa && (
+          {(!section.type || section.type === "qa") && section.qa && (
             <div className="space-y-4">
               {section.qa.map((qa, i) => (
                 <div
@@ -214,6 +216,28 @@ export default function TheoryContent({ subject, topic, theory, subjectId, topic
                       उ.
                     </span>
                     <p className="pt-1 leading-[1.7] text-slate-700 dark:text-zinc-300">{renderFormattedText(qa.a)}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Subsections (for nested content like ch7) */}
+          {section.subsections && section.subsections.length > 0 && (
+            <div className="space-y-4 mt-4">
+              {section.subsections.map((sub, i) => (
+                <div
+                  key={sub.id || `sub-${i}`}
+                  className="rounded-2xl p-4 sm:p-5"
+                  style={{ background: `${a.from}08`, border: `1px solid ${a.from}18` }}
+                >
+                  <h4 className="mb-2 text-[15px] font-bold text-slate-900 dark:text-zinc-100">{sub.title}</h4>
+                  <div className="space-y-2 text-[15px] leading-[1.85] text-slate-700 dark:text-zinc-300">
+                    {sub.content.split("\n").filter(Boolean).map((line, j) => (
+                      <p key={j} className={line.trim().match(/^[0-9]+\.|^-/) ? "ml-4 mb-1" : "mb-2"}>
+                        {renderFormattedText(line)}
+                      </p>
+                    ))}
                   </div>
                 </div>
               ))}
