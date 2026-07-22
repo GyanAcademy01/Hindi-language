@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Home, LayoutGrid } from "lucide-react";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
+import { FontSizeControl } from "@/components/common/FontSizeControl";
 
 const navigationItems = [
   { href: "/", label: "होम", icon: Home },
@@ -52,6 +53,7 @@ export function Topbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <FontSizeControl />
           <ThemeToggle />
         </div>
       </div>

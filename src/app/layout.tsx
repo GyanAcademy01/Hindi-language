@@ -49,11 +49,33 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('hindi-lang-theme');if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();` }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var t = localStorage.getItem('hindi-lang-theme');
+                  if (t === 'dark') { document.documentElement.classList.add('dark'); }
+                  var fsSizes = {xsmall:'14px',small:'15px',medium:'16px',large:'18px',xlarge:'22px'};
+                  var fs = localStorage.getItem('hindi-lang-font-size');
+                  if (fs && fsSizes[fs]) {
+                    document.documentElement.setAttribute('data-font-size', fs);
+                    document.documentElement.style.setProperty('--content-font-size', fsSizes[fs]);
+                  } else {
+                    document.documentElement.setAttribute('data-font-size', 'medium');
+                    document.documentElement.style.setProperty('--content-font-size', '16px');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="h-full flex flex-col bg-gradient-main transition-colors duration-300">
         <Topbar />
-        <div className="content-wrap flex-1 flex flex-col">{children}</div>
+        <div style={{ fontSize: "var(--content-font-size, 16px)" }} className="content-wrap flex-1 flex flex-col">
+          {children}
+        </div>
       </body>
     </html>
   );
