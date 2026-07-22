@@ -48,7 +48,7 @@ export default function HomePage() {
       <div className="mx-auto w-full max-w-5xl px-5 pt-12 sm:px-8 sm:pt-16">
         {/* Hero */}
         <section className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200/70 bg-indigo-50 px-3 py-1 text-[11px] font-bold text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200/70 bg-indigo-50 px-3.5 py-1 text-[11px] font-bold text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-500" />
             कक्षा 6 से 8 · व्याकरण · पद्धतिशास्त्र
           </span>
@@ -72,23 +72,23 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Stats - Horizontal Row Layout */}
-        <section className="mx-auto mt-12 grid max-w-2xl grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 cv-auto">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="flex items-center gap-3.5 rounded-[20px] border border-zinc-200/60 bg-white px-4 py-3.5 sm:px-4 sm:py-4 transition-all duration-300 hover:-translate-y-1 dark:border-white/[0.06] dark:bg-zinc-900"
-              style={{ boxShadow: BLACK_SM }}
-            >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-white shadow-sm" style={{ backgroundColor: s.color }}>
-                <Icon name={s.icon} className="h-5 w-5" />
-              </span>
-              <div className="flex flex-col text-left">
-                <p className="text-xl sm:text-2xl font-black tracking-tight text-zinc-900 dark:text-white leading-none">{s.value}</p>
-                <p className="mt-1 text-xs font-bold text-zinc-500 dark:text-zinc-400 leading-none">{s.label}</p>
-              </div>
+        {/* Stats - Unique Glassmorphic Capsule Bar */}
+        <section className="mx-auto mt-12 max-w-2xl cv-auto">
+          <div className="relative overflow-hidden rounded-[24px] border border-zinc-200/80 bg-white/80 p-3 sm:p-4 backdrop-blur-xl shadow-lg shadow-indigo-500/5 dark:border-zinc-800 dark:bg-zinc-900/80">
+            <div className="grid grid-cols-3 divide-x divide-zinc-200/70 dark:divide-zinc-800">
+              {stats.map((s) => (
+                <div key={s.label} className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3.5 px-2 py-1 text-center sm:text-left transition-all duration-300 hover:scale-[1.03]">
+                  <span className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-2xl text-white shadow-md shadow-black/10" style={{ backgroundColor: s.color }}>
+                    <Icon name={s.icon} className="h-5 w-5" />
+                  </span>
+                  <div className="flex flex-col">
+                    <p className="text-lg sm:text-2xl font-black tracking-tight text-zinc-900 dark:text-white leading-none">{s.value}</p>
+                    <p className="mt-1 text-[11px] sm:text-xs font-bold text-zinc-500 dark:text-zinc-400 leading-none">{s.label}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </section>
       </div>
 

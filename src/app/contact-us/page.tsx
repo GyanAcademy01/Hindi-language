@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Send, Smartphone, Globe, Phone, MessageSquare, Video, Camera } from "lucide-react";
+import { MapPin, Send, Smartphone, Globe, Phone, MessageSquare, Video, Camera, Clock, HelpCircle, ShieldAlert } from "lucide-react";
 
 export default function ContactUsPage() {
   const mapLink = "https://maps.app.goo.gl/8E9j5JSvLspXTRKk7";
@@ -8,6 +8,17 @@ export default function ContactUsPage() {
   const telegramLink = "https://t.me/gyanacademygandhinagar";
   const instagramLink = "https://instagram.com/gyanacademy_official";
   const websiteLink = "https://gyanacademys.com";
+
+  const contactFaqs = [
+    {
+      q: "हमारा संदेश भेजने के बाद उत्तर मिलने में कितना समय लगता है?",
+      a: "हमारी टीम 24 से 48 व्यावसायिक घंटों के भीतर आपके प्रश्नों का समाधान प्रदान करती है।",
+    },
+    {
+      q: "क्या मैं नए अध्याय या व्याकरण थ्योरी जोड़ने का सुझाव दे सकता हूँ?",
+      a: "हाँ, संपर्क फ़ॉर्म में 'अध्ययन सामग्री सुझाव' चुनकर आप अपना बहुमूल्य सुझाव भेज सकते हैं।",
+    },
+  ];
 
   return (
     <main className="relative flex-1 overflow-x-hidden overflow-y-auto px-4 py-6 sm:px-6 sm:py-8">
@@ -18,9 +29,9 @@ export default function ContactUsPage() {
         <div className="home-bg-grid" />
       </div>
 
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="mx-auto w-full max-w-4xl space-y-6">
         {/* Header */}
-        <div className="relative mb-6 flex min-h-[36px] items-center justify-center">
+        <div className="relative flex min-h-[36px] items-center justify-center">
           <div className="absolute left-0">
             <Link href="/" prefetch>
               <span className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-gradient-to-b from-[#f24c4c] to-[#d92b2b] border-b-[3px] border-[#9b1c1c] text-white hover:brightness-110 active:translate-y-[1.5px] active:border-b-[1.5px] transition-all duration-75 cursor-pointer shadow-[0_3px_8px_rgba(239,68,68,0.15)]" aria-label="पीछे जाएं">
@@ -41,13 +52,19 @@ export default function ContactUsPage() {
             <div className="rounded-[24px] border border-zinc-200/80 bg-white p-6 shadow-lg backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900">
               <h2 className="text-lg font-black text-zinc-900 dark:text-white flex items-center gap-2">
                 <MapPin className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-                कार्यालय का पता
+                कार्यालय का पता एवं समय
               </h2>
               <div className="mt-3 rounded-xl bg-zinc-50 p-4 border border-zinc-200/60 dark:bg-zinc-800/50 dark:border-zinc-700/50">
                 <h3 className="font-bold text-sm text-zinc-900 dark:text-white">ज्ञान अकादमी (Gyan Academy)</h3>
                 <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
                   ગાંધીનગર, ગુજરાત (Gandhinagar, Gujarat)
                 </p>
+
+                <div className="mt-3 flex items-center gap-2 text-xs font-semibold text-zinc-600 dark:text-zinc-400 border-t border-zinc-200/60 dark:border-zinc-700/50 pt-2.5">
+                  <Clock className="h-4 w-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
+                  <span>सोमवार - शनिवार: 9:00 AM से 6:00 PM</span>
+                </div>
+
                 <a
                   href={mapLink}
                   target="_blank"
@@ -63,7 +80,7 @@ export default function ContactUsPage() {
             {/* Official Social Links Card */}
             <div className="rounded-[24px] border border-zinc-200/80 bg-white p-6 shadow-lg backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900">
               <h2 className="text-base font-black text-zinc-900 dark:text-white mb-3">
-                सोशल मीडिया और संपर्क लिंक
+                सोशल मीडिया और चैनल
               </h2>
               <div className="grid grid-cols-2 gap-2.5">
                 <a
@@ -127,6 +144,16 @@ export default function ContactUsPage() {
             </h2>
             <form className="mt-4 flex flex-col gap-3 flex-1">
               <div>
+                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">पूछताछ का विषय (Subject)</label>
+                <select className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2.5 text-xs font-medium text-zinc-900 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+                  <option>📌 सामान्य पूछताछ (General Inquiry)</option>
+                  <option>🛠️ तकनीकी सहायता (Technical Support)</option>
+                  <option>📚 अध्ययन सामग्री सुझाव (Content Feedback)</option>
+                  <option>🎓 TET/TAT परीक्षा मार्गदर्शन (Exam Guidance)</option>
+                </select>
+              </div>
+
+              <div>
                 <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">आपका नाम (Full Name)</label>
                 <input
                   type="text"
@@ -163,6 +190,22 @@ export default function ContactUsPage() {
                 संदेश भेजें
               </button>
             </form>
+          </div>
+        </div>
+
+        {/* Contact FAQs */}
+        <div className="rounded-[24px] border border-zinc-200/80 bg-white p-6 shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
+          <h2 className="text-lg font-black text-zinc-900 dark:text-white flex items-center gap-2 mb-4">
+            <HelpCircle className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+            सहायता प्रश्नोत्तर (Support FAQs)
+          </h2>
+          <div className="space-y-3">
+            {contactFaqs.map((faq) => (
+              <div key={faq.q} className="rounded-xl bg-zinc-50 p-4 border border-zinc-200/60 dark:bg-zinc-800/40 dark:border-zinc-700/50">
+                <h4 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white">{faq.q}</h4>
+                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-300">{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
