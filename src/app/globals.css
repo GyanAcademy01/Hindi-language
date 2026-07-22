@@ -161,6 +161,16 @@
 
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+  /* Performance utilities */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 300px;
+  }
+  .will-change-transform {
+    will-change: transform, opacity;
+  }
+
 }
 
 @media (max-width: 640px) {

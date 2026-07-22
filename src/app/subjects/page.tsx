@@ -1,18 +1,5 @@
-"use client";
-
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
 import { subjects } from "@/lib/data";
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
-};
 
 export default function SubjectsPage() {
   return (
@@ -29,8 +16,8 @@ export default function SubjectsPage() {
         {/* Header */}
         <div className="relative mb-5 flex min-h-[36px] items-center justify-center">
           <div className="absolute left-0">
-            <Link href="/">
-              <button className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-gradient-to-b from-[#f24c4c] to-[#d92b2b] border-b-[3px] border-[#9b1c1c] text-white hover:brightness-110 active:translate-y-[1.5px] active:border-b-[1.5px] active:shadow-none transition-all duration-75 cursor-pointer shadow-[0_3px_8px_rgba(239,68,68,0.15)]" aria-label="पीछे जाएं">
+            <Link href="/" prefetch>
+              <button className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-gradient-to-b from-[#f24c4c] to-[#d92b2b] border-b-[3px] border-[#9b1c1c] text-white hover:brightness-110 active:translate-y-[1.5px] active:border-b-[1.5px] active:shadow-none transition-all duration-75 cursor-pointer shadow-[0_3px_8px_rgba(239,68,68,0.15)]" aria-label="પીછે जाएं">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5 drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
               </button>
             </Link>
@@ -46,16 +33,14 @@ export default function SubjectsPage() {
           </div>
         </div>
 
-        {/* Subject cards */}
-        <motion.div variants={containerVariants} initial="hidden" animate="show" className="mt-6 grid grid-cols-1 gap-4">
+        {/* Subject cards - Pure Static Prerendered HTML */}
+        <div className="mt-6 grid grid-cols-1 gap-4 cv-auto">
           {subjects.map((subject) => {
             return (
-              <motion.div key={subject.id} variants={itemVariants}>
-                <Link href={`/chapter/${subject.id}`}>
-                  <motion.div
-                    whileHover={{ y: -4, boxShadow: `0 10px 24px -4px rgba(0,0,0,0.22), 0 22px 46px -14px rgba(0,0,0,0.32)` }}
-                    transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className="group relative cursor-pointer overflow-hidden rounded-[22px] border border-zinc-200/60 bg-white dark:border-white/[0.06] dark:bg-zinc-900"
+              <div key={subject.id}>
+                <Link href={`/chapter/${subject.id}`} prefetch>
+                  <div
+                    className="group relative cursor-pointer overflow-hidden rounded-[22px] border border-zinc-200/60 bg-white transition-all duration-300 hover:-translate-y-1 dark:border-white/[0.06] dark:bg-zinc-900"
                     style={{ boxShadow: "0 4px 12px -2px rgba(0,0,0,0.10), 0 12px 30px -14px rgba(0,0,0,0.20)" }}
                   >
                     {/* soft color wash */}
@@ -96,12 +81,12 @@ export default function SubjectsPage() {
                         </svg>
                       </span>
                     </div>
-                  </motion.div>
+                  </div>
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </section>
     </main>
   );

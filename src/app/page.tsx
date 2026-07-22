@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
 import { subjects } from "@/lib/data";
 
 /* ---------------- Inline icons ---------------- */
@@ -25,12 +22,7 @@ function Icon({ name, className }: { name: string; className?: string }) {
   );
 }
 
-const container: Variants = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.07 } } };
-const item: Variants = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } } };
-
 const BLACK_SM = "0 4px 12px -2px rgba(0,0,0,0.10), 0 12px 30px -14px rgba(0,0,0,0.20)";
-const BLACK_HOVER = "0 10px 24px -4px rgba(0,0,0,0.22), 0 22px 46px -14px rgba(0,0,0,0.32)";
-
 
 export default function HomePage() {
   const allTopics = subjects.flatMap((s) => s.topics);
@@ -45,22 +37,17 @@ export default function HomePage() {
 
   return (
     <main className="relative flex-1 overflow-hidden">
-      {/* Ambient background */}
+      {/* Ambient background - Pure CSS Static Render */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        {/* soft color orbs */}
         <div className="absolute -left-32 top-8 h-80 w-80 rounded-full bg-indigo-400/20 blur-3xl dark:bg-indigo-500/10" />
         <div className="absolute -right-24 top-24 h-96 w-96 rounded-full bg-violet-400/20 blur-3xl dark:bg-violet-500/10" />
         <div className="absolute bottom-0 left-[30%] h-72 w-72 rounded-full bg-cyan-300/15 blur-3xl dark:bg-cyan-500/10" />
+        <div className="home-bg-grid" />
       </div>
 
       <div className="mx-auto w-full max-w-5xl px-5 pb-20 pt-12 sm:px-8 sm:pt-16">
         {/* Hero */}
-        <motion.section
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto max-w-3xl text-center"
-        >
+        <section className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200/70 bg-indigo-50 px-3 py-1 text-[11px] font-bold text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-500" />
             कक्षा 6 से 8 · व्याकरण · पद्धतिशास्त्र
@@ -74,32 +61,23 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex items-center justify-center">
             <Link href="/subjects" prefetch>
-              <motion.span
-                whileHover={{ y: -3, boxShadow: BLACK_HOVER }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-extrabold text-white"
+              <span
+                className="inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-extrabold text-white transition-transform duration-200 hover:-translate-y-1 active:scale-95"
                 style={{ backgroundColor: "#6366f1", boxShadow: BLACK_SM }}
               >
                 पढ़ाई शुरू करें
                 <Icon name="arrow" className="h-4 w-4" />
-              </motion.span>
+              </span>
             </Link>
           </div>
-        </motion.section>
+        </section>
 
         {/* Stats */}
-        <motion.section
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="mx-auto mt-14 grid max-w-2xl grid-cols-3 gap-4"
-        >
+        <section className="mx-auto mt-14 grid max-w-2xl grid-cols-3 gap-4 cv-auto">
           {stats.map((s) => (
-            <motion.div
+            <div
               key={s.label}
-              variants={item}
-              className="rounded-[20px] border border-zinc-200/60 bg-white p-5 text-center dark:border-white/[0.06] dark:bg-zinc-900"
+              className="rounded-[20px] border border-zinc-200/60 bg-white p-5 text-center transition-all duration-300 hover:-translate-y-1 dark:border-white/[0.06] dark:bg-zinc-900"
               style={{ boxShadow: BLACK_SM }}
             >
               <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl text-white" style={{ backgroundColor: s.color }}>
@@ -107,9 +85,9 @@ export default function HomePage() {
               </span>
               <p className="mt-3 text-2xl font-black tracking-tight text-zinc-900 dark:text-white">{s.value}</p>
               <p className="mt-0.5 text-xs font-semibold text-zinc-500 dark:text-zinc-400">{s.label}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.section>
+        </section>
       </div>
     </main>
   );
