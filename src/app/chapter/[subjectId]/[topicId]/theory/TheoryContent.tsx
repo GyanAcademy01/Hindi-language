@@ -111,20 +111,20 @@ export default function TheoryContent({ subject, topic, theory, subjectId, topic
         key={section.id || `section-${index}`}
         className="overflow-hidden rounded-[26px] border border-zinc-200/60 dark:border-zinc-850 shadow-[0_25px_55px_-12px_rgba(0,0,0,0.26),0_12px_24px_-10px_rgba(0,0,0,0.2)]"
       >
-        {/* Gradient header banner */}
-        <div className="relative px-5 py-5 sm:px-7" style={{ background: gradient }}>
-          <div className="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full bg-white/15 blur-lg" />
-          <div className="pointer-events-none absolute -bottom-12 left-10 h-28 w-28 rounded-full bg-white/10 blur-lg" />
-          <div className="relative flex items-center gap-3.5">
+        {/* Gradient header banner - Sleek Compact Height */}
+        <div className="relative px-4 py-2.5 sm:px-5 sm:py-3" style={{ background: gradient }}>
+          <div className="pointer-events-none absolute -right-8 -top-10 h-24 w-24 rounded-full bg-white/15 blur-lg" />
+          <div className="pointer-events-none absolute -bottom-10 left-10 h-20 w-20 rounded-full bg-white/10 blur-lg" />
+          <div className="relative flex items-center gap-3">
             <span
-              className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-white/25 text-white ring-1 ring-white/30 backdrop-blur-sm"
-              style={{ boxShadow: "0 6px 16px -4px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.4)" }}
+              className="flex h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 items-center justify-center rounded-xl bg-white/25 text-white ring-1 ring-white/30 backdrop-blur-sm"
+              style={{ boxShadow: "0 4px 12px -3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4)" }}
             >
-              <Icon name={a.icon} className="h-6 w-6" />
+              <Icon name={a.icon} className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
             </span>
             <div className="min-w-0">
-              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/80">{a.label}</div>
-              <h3 className="text-lg font-extrabold leading-snug text-white drop-shadow-sm sm:text-xl">{section.title}</h3>
+              <div className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-white/80 leading-none mb-0.5">{a.label}</div>
+              <h3 className="text-sm sm:text-base font-extrabold leading-snug text-white drop-shadow-sm">{section.title}</h3>
             </div>
           </div>
         </div>
