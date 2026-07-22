@@ -124,6 +124,48 @@
     border: 1px solid oklch(0 0 0 / 6%);
     box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.12), 0 4px 12px -5px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
   }
+  .topbar-capsule-controls .glass-card:hover {
+  background: oklch(1 0 0 / 95%);
+}
+.dark .topbar-capsule-controls .glass-card:hover {
+  background: oklch(0.26 0.04 280 / 85%);
+}
+
+/* ===== DYNAMIC TEXT FONT SIZE SCALING ===== */
+[data-font-size="xsmall"] p,
+[data-font-size="xsmall"] li,
+[data-font-size="xsmall"] td,
+[data-font-size="xsmall"] th {
+  font-size: 14px !important;
+}
+
+[data-font-size="small"] p,
+[data-font-size="small"] li,
+[data-font-size="small"] td,
+[data-font-size="small"] th {
+  font-size: 15px !important;
+}
+
+[data-font-size="medium"] p,
+[data-font-size="medium"] li,
+[data-font-size="medium"] td,
+[data-font-size="medium"] th {
+  font-size: 16.5px !important;
+}
+
+[data-font-size="large"] p,
+[data-font-size="large"] li,
+[data-font-size="large"] td,
+[data-font-size="large"] th {
+  font-size: 19px !important;
+}
+
+[data-font-size="xlarge"] p,
+[data-font-size="xlarge"] li,
+[data-font-size="xlarge"] td,
+[data-font-size="xlarge"] th {
+  font-size: 22.5px !important;
+}
   .dark .glass-card {
     background: oklch(0.18 0.03 280 / 60%);
     border: 1px solid oklch(1 0 0 / 8%);
