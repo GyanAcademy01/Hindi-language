@@ -23,10 +23,9 @@ export const FONT_SIZE_ORDER: FontSizeLevel[] = [
 
 function applyFontSize(level: FontSizeLevel) {
   document.documentElement.setAttribute("data-font-size", level);
-  document.documentElement.style.setProperty(
-    "--content-font-size",
-    FONT_SIZE_CONFIG[level].px
-  );
+  const px = FONT_SIZE_CONFIG[level].px;
+  document.documentElement.style.setProperty("--content-font-size", px);
+  document.documentElement.style.fontSize = px;
 }
 
 export function useFontSize() {

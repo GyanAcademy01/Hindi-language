@@ -29,7 +29,7 @@ export function Topbar() {
           <span className="text-base font-black tracking-tight text-zinc-900 dark:text-white">हिंदी भाषा</span>
         </Link>
 
-        <nav aria-label="मुख्य नेविगेशन" className="flex items-center rounded-xl bg-zinc-100/80 p-1 dark:bg-zinc-900">
+        <nav aria-label="मुख्य नेविगेशन" className="hidden sm:flex items-center rounded-xl bg-zinc-100/80 p-1 dark:bg-zinc-900">
           {navigationItems.map(({ href, label, icon: Icon }) => {
             const isActive = pathname === href || (href === "/subjects" && pathname.startsWith("/chapter"));
 

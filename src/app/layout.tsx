@@ -58,13 +58,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   if (t === 'dark') { document.documentElement.classList.add('dark'); }
                   var fsSizes = {xsmall:'14px',small:'15px',medium:'16px',large:'18px',xlarge:'22px'};
                   var fs = localStorage.getItem('hindi-lang-font-size');
-                  if (fs && fsSizes[fs]) {
-                    document.documentElement.setAttribute('data-font-size', fs);
-                    document.documentElement.style.setProperty('--content-font-size', fsSizes[fs]);
-                  } else {
-                    document.documentElement.setAttribute('data-font-size', 'medium');
-                    document.documentElement.style.setProperty('--content-font-size', '16px');
-                  }
+                  var activePx = (fs && fsSizes[fs]) ? fsSizes[fs] : (window.innerWidth < 768 ? '15px' : '16px');
+                  document.documentElement.setAttribute('data-font-size', fs || (window.innerWidth < 768 ? 'small' : 'medium'));
+                  document.documentElement.style.setProperty('--content-font-size', activePx);
+                  document.documentElement.style.fontSize = activePx;
                 } catch(e) {}
               })();
             `,
