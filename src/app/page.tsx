@@ -72,19 +72,21 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="mx-auto mt-14 grid max-w-2xl grid-cols-3 gap-4 cv-auto">
+        {/* Stats - Horizontal Row Layout */}
+        <section className="mx-auto mt-12 grid max-w-2xl grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 cv-auto">
           {stats.map((s) => (
             <div
               key={s.label}
-              className="rounded-[20px] border border-zinc-200/60 bg-white p-5 text-center transition-all duration-300 hover:-translate-y-1 dark:border-white/[0.06] dark:bg-zinc-900"
+              className="flex items-center gap-3.5 rounded-[20px] border border-zinc-200/60 bg-white px-4 py-3.5 sm:px-4 sm:py-4 transition-all duration-300 hover:-translate-y-1 dark:border-white/[0.06] dark:bg-zinc-900"
               style={{ boxShadow: BLACK_SM }}
             >
-              <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl text-white" style={{ backgroundColor: s.color }}>
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-white shadow-sm" style={{ backgroundColor: s.color }}>
                 <Icon name={s.icon} className="h-5 w-5" />
               </span>
-              <p className="mt-3 text-2xl font-black tracking-tight text-zinc-900 dark:text-white">{s.value}</p>
-              <p className="mt-0.5 text-xs font-semibold text-zinc-500 dark:text-zinc-400">{s.label}</p>
+              <div className="flex flex-col text-left">
+                <p className="text-xl sm:text-2xl font-black tracking-tight text-zinc-900 dark:text-white leading-none">{s.value}</p>
+                <p className="mt-1 text-xs font-bold text-zinc-500 dark:text-zinc-400 leading-none">{s.label}</p>
+              </div>
             </div>
           ))}
         </section>
