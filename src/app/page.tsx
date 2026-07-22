@@ -36,7 +36,7 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="relative flex-1 overflow-hidden">
+    <main className="relative flex-1 overflow-hidden flex flex-col justify-between">
       {/* Ambient background - Pure CSS Static Render */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -left-32 top-8 h-80 w-80 rounded-full bg-indigo-400/20 blur-3xl dark:bg-indigo-500/10" />
@@ -45,7 +45,7 @@ export default function HomePage() {
         <div className="home-bg-grid" />
       </div>
 
-      <div className="mx-auto w-full max-w-5xl px-5 pb-20 pt-12 sm:px-8 sm:pt-16">
+      <div className="mx-auto w-full max-w-5xl px-5 pt-12 sm:px-8 sm:pt-16">
         {/* Hero */}
         <section className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200/70 bg-indigo-50 px-3 py-1 text-[11px] font-bold text-indigo-600 dark:border-indigo-500/20 dark:bg-indigo-500/10 dark:text-indigo-300">
@@ -89,6 +89,19 @@ export default function HomePage() {
           ))}
         </section>
       </div>
+
+      {/* Bottom Footer - Child-Development Pattern */}
+      <footer className="mt-12 pb-6 text-center text-xs font-semibold text-zinc-500 dark:text-zinc-400 z-20">
+        <div className="flex items-center justify-center gap-4">
+          <Link href="/about" prefetch className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+            About Us
+          </Link>
+          <span className="text-zinc-300 dark:text-zinc-700">|</span>
+          <Link href="/contact-us" prefetch className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+            Contact Us
+          </Link>
+        </div>
+      </footer>
     </main>
   );
 }
