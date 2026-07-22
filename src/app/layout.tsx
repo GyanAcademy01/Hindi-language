@@ -30,13 +30,13 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Hindi भाषा - Gyan Academy",
-    template: "%s | Gyan Academy",
+    default: "Hindi भाषा WebApp",
+    template: "%s | Hindi Language",
   },
-  description: "हिंदी भाषा सीखने के लिए Theory और Test - कक्षा 6 से 8 · व्याकरण · पद्धतिशास्त्र - Gyan Academy",
-  keywords: ["Hindi", "Gyan Academy", "Grammar", "हिंदी व्याकरण", "भाषा", "पद्धतिशास्त्र"],
-  authors: [{ name: "Gyan Academy" }],
-  creator: "Gyan Academy",
+  description: "हिंदी भाषा सीखने के लिए Theory और Test - कक्षा 6 से 8 · व्याकरण · पद्धतिशास्त्र",
+  keywords: ["Hindi Language", "हिंदी व्याकरण", "भाषा", "पद्धतिशास्त्र"],
+  authors: [{ name: "Hindi Language" }],
+  creator: "Hindi Language",
   robots: {
     index: true,
     follow: true,
