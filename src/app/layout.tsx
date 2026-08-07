@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Geist_Mono, Noto_Sans_Devanagari } from "next/font/google";
 import { Topbar } from "@/components/layout/Topbar";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const notoDevanagari = Noto_Sans_Devanagari({
@@ -90,6 +92,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div style={{ fontSize: "var(--content-font-size, 16px)" }} className="content-wrap flex-1 flex flex-col">
           {children}
         </div>
+        <Analytics />
+        <Script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d8a2307137f14b62b1b36fae75924765"}' />
       </body>
     </html>
   );
